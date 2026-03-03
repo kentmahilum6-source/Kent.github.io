@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Surprise </title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ffc1cc, #ffe4e1);
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+    h1 {
+      margin-top: 50px;
+      color: #d6336c;
+    }
+    input[type="button"] {
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    input[type="button"]:hover {
+      transform: scale(1.1);
+    }
+    #Bn {
+      position: absolute;
+      top: 370px;
+      left: 166px;
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: #ff4d6d;
+      animation: floatUp 3s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(360deg); opacity: 0; }
+    }
+    #gif {
+      width: 200px;
+      margin-top: 30px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--  Background music -->
+  <audio id="bgm" loop>
+    <source src="Music1.mp3" type="audio/mpeg">
+  </audio>
+
+  <!--  Title -->
+  <h1> I like you!!😉</h1>
+    <h2>Do you like me too?🤔</h2>
+
+  <!--  GIF (either local or online link) -->
+  <img id="gif" src="https://media1.tenor.com/m/VR_FUcI2pfMAAAAd/cat-cat-blush.gif">
+
+  <!--  YES button -->
+  <div id="By">
+    <input type="button" value=" YES  " onclick="f1(); playMusic();">
+  </div>
+
+  <!--  NO button -->
+  <div id="Bn">
+    <input type="button" value=" NO  " onmouseover="f()">
+  </div>
+
+  <script>
+    // moving NO button
+    var flag = 1;
+    function f() {
+      var Bn = document.getElementById("Bn");
+      if (flag == 1) {
+        Bn.style.top = "400px";
+        Bn.style.left = "300px";
+        flag = 2;
+      } else if (flag == 2) {
+        Bn.style.top = "400px";
+        Bn.style.left = "50px";
+        flag = 3;
+      } else if (flag == 3) {
+        Bn.style.top = "370px";
+        Bn.style.left = "166px";
+        flag = 1;
+      }
+    }
+
+    // YES button pop-ups
+    function f1() {
+      var Name = prompt("What should I call you?");
+      if (!Name) {
+        alert("Please enter your name ");
+        return; // stop if no name
+      }
+
+      //  play music after name entered
+      playMusic();
+
+      alert("Hi " + Name + ", I wasn’t planning to say this...");
+      alert(Name + ", I found myself smiling whenever I see you.");
+      alert(Name + ", But I don’t know when it started…");
+      alert(Name + ", No pressure or anything  I just wanted to be honest about how I feel.");
+      alert(Name + ", So… yeah. I like you. And I hope this doesn’t make things awkward.😝 ");
+      alert(Name + ", Whatever your answer is, I’ll respect it. I just didn’t want to keep this to myself.🤭");
+
+      createHearts(15); // floating hearts
+    }
+
+    // play music (mobile safe)
+    function playMusic() {
+      var music = document.getElementById("bgm");
+      music.volume = 0.3;
+      music.play();
+    }
+
+    // create floating hearts
+    function createHearts(count) {
+      for (let i = 0; i < count; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.innerHTML = "";
+        document.body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
